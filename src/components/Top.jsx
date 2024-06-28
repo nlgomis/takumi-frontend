@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Top = () => {
-    return (
-        <div>top</div>
-    )
-}
+  return <div>top</div>;
+};
 
-export default Top
+export default Top;
