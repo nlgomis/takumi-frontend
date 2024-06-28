@@ -1,22 +1,20 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Top from "./components/Top";
-import Contact from "./components/Contact";
-import MyPage from "./components/MyPage";
+import MainPage from "./components/MainPage/MainPage";
+import MyPage from "./components/MyPage/MyPage";
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Top />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/mypage" element={<MyPage />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<MainPage />} />
+                    <Route path="/mypage" element={<MyPage />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
