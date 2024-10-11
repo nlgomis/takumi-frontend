@@ -13,5 +13,14 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".vertical-rl": {
+          writingMode: "vertical-rl",
+        },
+      };
+      addUtilities(newUtilities);
+    },
+  ],
 };

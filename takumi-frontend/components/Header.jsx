@@ -1,8 +1,12 @@
-import React from 'react'
+"use client"
+import Link from "next/link"
+import Nav from "./Nav"
 
 const Header = () => {
     return (
-        <div>Header</div>
+        <header className="bg-black text-white sticky top-0 py-8 z-40">
+            <Nav/>
+        </header>
     )
 }
 

@@ -1,8 +1,10 @@
-import React from 'react'
+"use client"
 
 const Footer = () => {
     return (
-        <div>Footer</div>
+        <footer className="bg-black py-2 text-white text-center">
+            &copy;Takumi
+        </footer>
     )
 }
 
