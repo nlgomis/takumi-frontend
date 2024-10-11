@@ -26,7 +26,7 @@ const Nav = () => {
 
 
     return (
-        <div className="flex">
+        <div className="flex justify-end">
             <nav className={
                 // trueの時とfalseの時でcssを分ける
                 open
@@ -36,7 +36,7 @@ const Nav = () => {
                 <ul className={
                     open
                         ? "flex h-screen flex-row-reverse justify-center items-center gap-10 text-xl"
-                        : "block "
+                        : "block"
                 }
                 >
                     {links.map((link, index) => (
