@@ -27,6 +27,8 @@ const Nav = () => {
 
     return (
         <div className="flex justify-end">
+            
+
             <nav className={
                 // trueの時とfalseの時でcssを分ける
                 open
