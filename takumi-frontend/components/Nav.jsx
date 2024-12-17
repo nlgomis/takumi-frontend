@@ -1,8 +1,9 @@
 "use client"
+
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-
+import Image from "next/image"
 
 const Nav = () => {
     const links = [
@@ -11,76 +12,113 @@ const Nav = () => {
         { label: '商品一覧', path: '/products/' },
         { label: '匠の職人', path: '/craftsman/' },
         { label: 'アクセス', path: '/access/' },
-    ];
-    const [open, setOpen] = useState(false);
+    ]
+
+    // const languages = [
+    //     { label: '日本語', code: 'ja' },
+    //     { label: 'ENG', code: 'en' },
+    //     { label: '中文', code: 'zh' },
+    // ]
+
+    const [open, setOpen] = useState(false)
+    const navigation = usePathname()
 
     const handleMenuOpen = () => {
-        setOpen(!open);
+        setOpen(!open)
     }
 
     const handleMenuClose = () => {
-        setOpen(false);
+        setOpen(false)
     }
 
-    const navigation = usePathname();
-
-
     return (
-        <div className="flex justify-end">
-            
+        <div className="fixed w-full">
+            {/* Language Selector */}
+            {/* <div className="absolute z-[60] flex -top-4 right-20 gap-4 h-10">
+                {languages.map((lang) => (
+                    <button
+                        key={lang.code}
+                        className="text-sm text-white hover:text-gray-400 transition-all duration-300"
+                    >
+                        {lang.label}
+                    </button>
+                ))}
+            </div> */}
 
-            <nav className={
-                // trueの時とfalseの時でcssを分ける
-                open
-                    ? "z-[50] bg-black top-0 right-0 bottom-0 left-0 h-screen fixed flex flex-col"
-                    : " right-[-100%] fixed"
-            }>
-                <ul className={
-                    open
-                        ? "flex h-screen flex-row-reverse justify-center items-center gap-10 text-xl"
-                        : "block"
-                }
-                >
-                    {links.map((link, index) => (
-                        <li key={index} className='text-white hover:text-gray-400 duration-500 text-2xl xs:text-3xl lg:text-4xl xl:text-5xl vertical-rl'>
-                            <Link
-                                className={`${link.path === navigation && 'text-gray-400'} relative flex items-center group hover:text-gray-400 transition-all duration-500`}
-                                onClick={handleMenuClose}
-                                href={link.path}
-                                // ページ遷移をした際,ページトップに行かないようにfalse
-                                scroll={false}
-                            >
-                                {link.label}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
+            {/* Hamburger Button */}
             <button
-                className="z-[50] relative w-10 h-10 mx-3 sm:mx-5 lg:mr-12"
+                className="z-[60] fixed top-4 right-4 w-10 h-10"
                 onClick={handleMenuOpen}
             >
-                <span className={
-                    open
-                        ? "absolute top-1/2 left-0 block w-9 h-0.5 xs:w-8 xs:h-0.5 bg-white rotate-45 transition-all duration-300"
-                        : "absolute top-1/4 left-0 block w-9 h-0.5 xs:w-8 xs:h-0.5 bg-white transition-all duration-300"
-                }
-                />
-                <span className={
-                    open
-                        ? "absolute top-1/2 left-0 block w-9 h-0.5 xs:w-8 xs:h-0.5 bg-white opacity-0 transition-all duration-300"
-                        : "absolute top-1/2 left-0 block w-9 h-0.5 xs:w-8 xs:h-0.5 bg-white -translate-y-1/2 transition-all duration-300"
-                }
-                />
-                <span className={
-                    open
-                        ? "absolute top-1/2 left-0 block w-9 h-0.5 xs:w-8 xs:h-0.5 bg-white -rotate-45 transition-all duration-300"
-                        : "absolute bottom-1/4 left-0 block w-9 h-0.5 xs:w-8 xs:h-0.5 bg-white transition-all duration-300"
-                }
-                />
+                <span className={`
+                    absolute left-0 block w-5 h-0.5 bg-white transition-all duration-300
+                    ${open
+                        ? "top-1/2 rotate-45"
+                        : "top-1/3"
+                    }
+                `} />
+                <span className={`
+                    absolute top-1/2 left-0 block w-5 h-0.5 bg-white transition-all duration-300
+                    ${open
+                        ? "opacity-0"
+                        : "-translate-y-1/2"
+                    }
+                `} />
+                <span className={`
+                    absolute left-0 block w-5 h-0.5 bg-white transition-all duration-300
+                    ${open
+                        ? "top-1/2 -rotate-45"
+                        : "bottom-1/3"
+                    }
+                `} />
             </button>
+
+            {/* Navigation Menu */}
+            <nav className={`
+                fixed inset-0 bg-black transition-all duration-500
+                ${open ? "opacity-100 visible" : "opacity-0 invisible"}
+            `}>
+                <div className="container h-screen mx-auto px-4 flex justify-center items-center">
+                    {/* Logo */}
+                    <div className="w-1/5">
+                        <Image
+                            src="/images/mainvisual_logo.png"
+                            alt="ロゴ"
+                            width={250}
+                            height={250}
+                            quality={100}
+                            priority
+                        />
+                    </div>
+
+                    {/* Vertical Line */}
+                    <div className="w-px h-3/4 bg-white mx-12" />
+
+                    {/* Navigation Links */}
+                    <ul className="w-3/5 flex flex-row-reverse justify-start items-center gap-16">
+                        {links.map((link) => (
+                            <li key={link.path} className="writing-vertical">
+                                <Link
+                                    href={link.path}
+                                    onClick={handleMenuClose}
+                                    scroll={false}
+                                    className={`
+                                        text-2xl xs:text-3xl lg:text-4xl xl:text-5xl
+                                        writing-mode-vertical-rl
+                                        ${link.path === navigation ? 'text-gray-400' : 'text-white'}
+                                        hover:text-gray-400 transition-all duration-500
+                                    `}
+                                >
+                                    {link.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </nav>
         </div>
     )
 }
 
 export default Nav
+

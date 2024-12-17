@@ -14,6 +14,13 @@
   }
 }
 
+@layer utilities {
+  .writing-mode-vertical-rl {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
