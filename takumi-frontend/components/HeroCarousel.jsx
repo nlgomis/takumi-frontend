@@ -39,7 +39,7 @@ const heroData = [
 
 const HeroCarousel = () => {
     return (
-        <div className="relative w-full h-[calc(100vh-104px)] max-h-[1000px]">
+        <div className="relative w-full h-[calc(100dvh-64px)] ">
             <Swiper
                 slidesPerView={1}
                 spaceBetween={0}

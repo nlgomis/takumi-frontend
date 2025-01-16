@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Recommend from "@/components/Recommend";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <div>
          <Hero/>
          <About/>
+         <Recommend/>
     </div>
   );
 }

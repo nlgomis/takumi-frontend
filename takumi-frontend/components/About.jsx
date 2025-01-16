@@ -2,16 +2,16 @@ import React from 'react';
 
 const About = () => {
     return (
-        <section className="relative w-full h-[calc(100vh-104px)] max-h-[800px] bg-black">
+        <section className="relative w-full h-[calc(100dvh-64px)] max-h-[800px] bg-black">
             {/* Background Image */}
-            <div className="absolute inset-0 w-full h-full">
+            <div className="absolute inset-0 w-full h-full ">
                 <img
                     src="images/about1.png"
                     alt="about1"
                     className="w-full lg:w-4/5 h-full object-cover"
                 />
                 {/* Overlay */}
-                {/* <div className="absolute inset-0 bg-white/20" /> */}
+                <div className="absolute inset-0 bg-black/15" />
             </div>
 
             {/* Content */}
