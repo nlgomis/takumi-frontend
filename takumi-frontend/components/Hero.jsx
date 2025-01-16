@@ -1,5 +1,3 @@
-"use client"
-
 import HeroCarousel from "./HeroCarousel"
 
 const Hero = () => {

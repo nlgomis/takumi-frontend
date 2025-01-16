@@ -80,7 +80,7 @@ const Nav = () => {
             `}>
                 <div className="container h-screen mx-auto px-4 flex justify-center items-center">
                     {/* Logo */}
-                    <div className="w-1/5">
+                    <div className="w-32 md:w-1/5">
                         <Image
                             src="/images/mainvisual_logo.png"
                             alt="ロゴ"
@@ -92,19 +92,19 @@ const Nav = () => {
                     </div>
 
                     {/* Vertical Line */}
-                    <div className="w-px h-3/4 bg-white mx-12" />
+                    <div className="w-px h-3/4 bg-white mx-10 md:mx-12"/>
 
                     {/* Navigation Links */}
-                    <ul className="w-3/5 flex flex-row-reverse justify-start items-center gap-16">
+                    <ul className=" md:w-3/5 md:flex md:flex-row-reverse justify-center items-center gap-16">
                         {links.map((link) => (
-                            <li key={link.path} className="writing-vertical">
+                            <li key={link.path} className="md:writing-vertical mb-10 md:mb-0 ">
                                 <Link
                                     href={link.path}
                                     onClick={handleMenuClose}
                                     scroll={false}
                                     className={`
-                                        text-2xl xs:text-3xl lg:text-4xl xl:text-5xl
-                                        writing-mode-vertical-rl
+                                        text-xl sm:text-3xl lg:text-4xl
+                                        md:writing-mode-vertical-rl
                                         ${link.path === navigation ? 'text-gray-400' : 'text-white'}
                                         hover:text-gray-400 transition-all duration-500
                                     `}
