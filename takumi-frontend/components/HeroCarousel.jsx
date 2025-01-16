@@ -74,8 +74,8 @@ const HeroCarousel = () => {
                 <Image
                     src="/images/mainvisual_logo.png"
                     alt="メインロゴ"
-                    width={250}
-                    height={250}
+                    width={300}
+                    height={300}
                     quality={100}
                     priority
                 />
