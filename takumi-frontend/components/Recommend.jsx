@@ -40,9 +40,9 @@ const products = [
     }
 ]
 
-export default function ProductShowcase() {
+const Recommend = () =>  {
     return (
-        <div className="bg-black min-h-screen pt-14">
+        <section className="bg-black pt-14">
             <div className="max-w-full mx-auto">
                 <div className="ml-12 mb-8">
                     <h2 className="text-white text-base lg:text-xl font-light tracking-wide mb-1">
@@ -61,7 +61,7 @@ export default function ProductShowcase() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {products.map(product => (
                         <div key={product.id} className="flex flex-col">
-                            <div className="relative aspect-square overflow-hidden">
+                            <div className="relative aspect-[480/361] overflow-hidden">
                                 <Image
                                     src={product.imageUrl}
                                     alt={`${product.titleEn} - ${product.titleJp}`}
@@ -79,6 +79,8 @@ export default function ProductShowcase() {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
+
+export default Recommend;
