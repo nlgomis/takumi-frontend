@@ -23,10 +23,10 @@ export default function RootLayout({ children }) {
     return (
         <html lang="ja" className="h-full overflow-x-hidden">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-black`}
             >
                 <Header />
-                    <main className="flex-grow">{children}</main>
+                <main className="flex-grow">{children}</main>
                 <Footer />
             </body>
         </html>
