@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        shippori: ["Shippori Mincho", "serif"],
+    },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
