@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const masters = [
     {
@@ -7,24 +8,28 @@ const masters = [
         imageUrl: "/images/master1.png",
         name: "山田 龍之介",
         nameEn: "Ryunosuke Yamada",
+        link: "/masters/ryunosuke-yamada"
     },
     {
         id: 2,
         imageUrl: "/images/master2.png",
         name: "高橋 彦太郎",
         nameEn: "Hikotaro Takahashi",
+        link: "/masters/hikotaro-takahashi"
     },
     {
         id: 3,
         imageUrl: "/images/master3.png",
         name: "鈴木 美咲",
         nameEn: "Misaki Suzuki",
+        link: "/masters/misaki-suzuki"
     },
     {
         id: 4,
         imageUrl: "/images/master4.png",
         name: "佐藤 武",
         nameEn: "Takeshi Sato",
+        link: "/masters/takeshi-sato"
     },
 ]
 const Master = () => {
@@ -32,13 +37,17 @@ const Master = () => {
         <section>
             <div className="grid grid-cols-1 sm:grid-cols-2">
                 {masters.map(master => (
-                    <div key={master.id} className="flex flex-col">
-                        <div className="relative h-full  aspect-[120/43] overflow-hidden">
+                    <Link
+                        href={master.link}
+                        key={master.id}
+                        className="group block"
+                    >
+                        <div className="relative h-full aspect-[120/43] overflow-hidden">
                             <Image
                                 src={master.imageUrl}
                                 alt={`${master.nameEn} - ${master.name}`}
                                 fill
-                                className="object-contain"
+                                className="object-contain transition-all duration-500 group-hover:brightness-75 cursor-pointer"
                             />
                             {/* テキストオーバーレイ */}
                             <div className="absolute inset-0 flex flex-col ml-5 sm:ml-4 lg:ml-14 items-start justify-center ">
@@ -56,16 +65,7 @@ const Master = () => {
                                 </div>
                             </div>
                         </div>
-
-
-
-                        {/* <div className="bg-[#3C2A21] p-4 text-center">
-                            <h3 className="text-white text-xl mb-1">{master.name}</h3>
-                            <p className="text-white/70 text-sm tracking-wider">
-                                {master.nameEn}
-                            </p>
-                        </div> */}
-                    </div>
+                    </Link>
                 ))}
             </div>
         </section>
