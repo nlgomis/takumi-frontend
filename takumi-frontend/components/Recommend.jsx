@@ -4,14 +4,14 @@ import Link from "next/link"
 const products = [
     {
         id: 1,
-        imageUrl:"/images/item1.png",
+        imageUrl: "/images/item1.png",
         titleJp: "コップ",
         titleEn: "Cup",
         link: "/products/cup1"
     },
     {
         id: 2,
-        imageUrl:"/images/item2.png",
+        imageUrl: "/images/item2.png",
         titleJp: "コップ",
         titleEn: "Cup",
         link: "/products/cup2"
@@ -25,28 +25,28 @@ const products = [
     },
     {
         id: 4,
-        imageUrl:"/images/item4.png",
+        imageUrl: "/images/item4.png",
         titleJp: "お茶碗",
         titleEn: "Bowl",
         link: "/products/bowl"
     },
     {
         id: 5,
-        imageUrl:"/images/item5.png",
+        imageUrl: "/images/item5.png",
         titleJp: "飾り用のお皿",
         titleEn: "Display Plate",
         link: "/products/display-plate"
     },
     {
         id: 6,
-        imageUrl:"/images/item6.png",
+        imageUrl: "/images/item6.png",
         titleJp: "お皿",
         titleEn: "Plate",
         link: "/products/plate"
     }
 ]
 
-const Recommend = () =>  {
+const Recommend = () => {
     return (
         <section className="bg-black pt-14">
             <div className="max-w-full mx-auto">
@@ -65,10 +65,10 @@ const Recommend = () =>  {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {products.map(product => (
-                        <Link 
-                            href={product.link} 
-                            key={product.id} 
-                            className="group block"
+                        <Link
+                            href={product.link}
+                            key={product.id}
+                            className="group block relative"
                         >
                             <div className="flex flex-col overflow-hidden">
                                 <div className="relative aspect-[480/361] overflow-hidden">
@@ -78,6 +78,12 @@ const Recommend = () =>  {
                                         fill
                                         className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 cursor-pointer"
                                     />
+                                    {/* Hover Details Button */}
+                                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <div className="bg-white/20 border border-white text-white px-20 py-6 text-sm font-medium hover:bg-white/40 transition-colors">
+                                            今すぐ詳細を見る
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="bg-[#3C2A21] p-4 text-center transition-colors duration-500 group-hover:bg-[#4C3A31]">
                                     <h3 className="text-white text-xl mb-1 group-hover:text-white/80 transition-colors duration-500">

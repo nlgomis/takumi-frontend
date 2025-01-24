@@ -49,8 +49,14 @@ const Master = () => {
                                 fill
                                 className="object-contain transition-all duration-500 group-hover:brightness-75 cursor-pointer"
                             />
+                            {/* Hover Details Button */}
+                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <div className="bg-white/20 border border-white text-white px-14 py-4 text-sm font-medium hover:bg-white/40 transition-colors">
+                                    今すぐ詳細を見る
+                                </div>
+                            </div>
                             {/* テキストオーバーレイ */}
-                            <div className="absolute inset-0 flex flex-col ml-5 sm:ml-4 lg:ml-14 items-start justify-center ">
+                            <div className="absolute inset-0 flex flex-col ml-5 sm:ml-4 lg:ml-14 items-start justify-center group-hover:opacity-20 duration-300">
                                 <h3 className="text-white md:text-lg xl:text-2xl font-bold mb-2">
                                     {master.name}
                                 </h3>
