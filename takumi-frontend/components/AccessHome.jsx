@@ -1,0 +1,50 @@
+import Image from "next/image"
+import Link from "next/link"
+
+
+const AccessHome = () => {
+    return (
+        <section className="bg-white pt-14">
+            <div className="max-w-full mx-auto">
+                <div className="ml-5 lg:ml-12 mb-8">
+                    <h2 className="text-darkbrown text-base lg:text-xl font-light tracking-wide mb-1">
+                        Access
+                    </h2>
+                    <h1 className="text-darkbrown text-3xl lg:text-4xl font-light mb-2">
+                        アクセス
+                    </h1>
+                    <div className="relative flex flex-row items-center">
+                        <div className="-ml-2 w-[6px] h-[6px] rotate-45 origin-center bg-darkbrown" />
+                        <div className=" w-36 lg:w-52 h-px bg-darkbrown" />
+                    </div>
+                </div>
+
+                <div className="text-darkbrown text-base md:text-lg lg:text-xl px-6 lg:px-28 lg:py-12 ">
+                    <div className="flex flex-col gap-y-1 lg:gap-y-4">
+                        <p>住所：〒160-0023　東京都新宿区西新宿1-7-3</p>
+                        <p>電話：03-3344-1010</p>
+                        <p>営業時間：10:00 ~ 18:00</p>
+                    </div>
+
+
+
+                    <div className="my-8">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.403841643448!2d139.6944082117182!3d35.6916785724696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188db4f3887ae7%3A0x3d4f3619214cc0ea!2z44Kz44Kv44O844Oz44K_44Ov44O8!5e0!3m2!1sja!2sjp!4v1738324920194!5m2!1sja!2sjp"
+                            title="コク-ンタワーの地図"
+                            allow="fullscreen"
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            className="w-full h-[450px]"
+                            aria-label="コク-ンタワーの場所を示すGoogleマップ"
+                        />
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    )
+}
+
+export default AccessHome;

@@ -1,18 +1,20 @@
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Recommend from "@/components/Recommend";
-import Description from "@/components/Description";
-import Master from "@/components/Master";
+import AboutHome from "@/components/AboutHome";
+import RecommendHome from "@/components/RecommendHome";
+import DescriptionHome from "@/components/DescriptionHome";
+import MasterHome from "@/components/MasterHome";
+import AccessHome from "@/components/AccessHome";
 
 
 export default function Home() {
     return (
         <div>
             <Hero />
-            <About />
-            <Recommend />
-            <Description />
-            <Master />
+            <AboutHome />
+            <RecommendHome />
+            <DescriptionHome />
+            <MasterHome />
+            <AccessHome />
         </div>
     );
 }
