@@ -14,7 +14,7 @@ const shipporiMincho = Shippori_Mincho({
 
 export const metadata = {
     title: "Takumi",
-    description: "有田焼のECサイトです。",
+    description: "有田焼のECサイトです。", 
 };
 
 export default function RootLayout({ children }) {
