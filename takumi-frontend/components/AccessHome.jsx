@@ -2,9 +2,30 @@ import Image from "next/image"
 import Link from "next/link"
 
 
+const sns = [
+    {
+        id: 1,
+        imageUrl: "/images/instagram.png",
+        alt: "instagram",
+        link: "/#"
+    },
+    {
+        id: 2,
+        imageUrl: "/images/twitterX.png",
+        alt: "twiiterX",
+        link: "/#"
+    },
+    {
+        id: 3,
+        imageUrl: "/images/facebook.png",
+        alt: "facebook",
+        link: "/#"
+    },
+]
+
 const AccessHome = () => {
     return (
-        <section className="bg-white pt-14">
+        <section className="bg-white py-14">
             <div className="max-w-full mx-auto">
                 <div className="ml-5 lg:ml-12 mb-8">
                     <h2 className="text-darkbrown text-base lg:text-xl font-light tracking-wide mb-1">
@@ -39,7 +60,33 @@ const AccessHome = () => {
                             aria-label="コク-ンタワーの場所を示すGoogleマップ"
                         />
                     </div>
+
+                    <div className="flex flex-col items-end">
+                        <div className="relative flex flex-row gap-2 mb-2 justify-center">
+                            {sns.map(item => (
+                                <Link
+                                    href={item.link}
+                                    key={item.id}
+                                    className="relative"
+                                >
+                                    <Image
+                                        src={item.imageUrl}
+                                        alt={item.alt}
+                                        width={50}
+                                        height={50}
+                                        className="object-cover transition-transform duration-500 ease-in-out hover:scale-105 cursor-pointer
+                                        w-9 h-9 md:w-12 md:h-12"
+                                    />
+                                </Link>
+                            ))}
+                        </div>
+                        <div className="relative flex flex-row items-center">
+                            <div className=" w-36 lg:w-52 h-px bg-darkbrown" />
+                            <div className="-ml-2 w-[6px] h-[6px] rotate-45 origin-center bg-darkbrown" />
+                        </div>
+                    </div>
                 </div>
+
 
 
             </div>
