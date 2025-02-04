@@ -40,7 +40,7 @@ const AccessHome = () => {
                     </div>
                 </div>
 
-                <div className="text-darkbrown text-base md:text-lg lg:text-xl px-6 lg:px-28 lg:py-12 ">
+                <div className="text-darkbrown text-base md:text-base lg:text-lg px-6 lg:px-28 lg:py-12 ">
                     <div className="flex flex-col gap-y-1 lg:gap-y-4">
                         <p>住所：〒160-0023　東京都新宿区西新宿1-7-3</p>
                         <p>電話：03-3344-1010</p>
@@ -81,7 +81,7 @@ const AccessHome = () => {
                             ))}
                         </div>
                         <div className="relative flex flex-row items-center">
-                            <div className=" w-36 lg:w-52 h-px bg-darkbrown" />
+                            <div className=" w-44 md:w-60 h-px bg-darkbrown" />
                             <div className="-ml-2 w-[6px] h-[6px] rotate-45 origin-center bg-darkbrown" />
                         </div>
                     </div>
