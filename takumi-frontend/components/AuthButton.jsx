@@ -21,7 +21,7 @@ const navBar = [
 
 const AuthButton = () => {
     return (
-        <div className="absolute z-[60] flex -top-4 right-20 gap-4 h-10">
+        <div className="absolute flex items-center justify-end right-16 md:right-20 -top-3 gap-5 z-[60]">
             {navBar.map((item) => (
                 <Link
                     href={item.path || '#'}
@@ -36,7 +36,7 @@ const AuthButton = () => {
                             className="object-contain brightness-100 group-hover:brightness-75 transition-all duration-300"
                         />
                     </div>
-                    <span className="text-sm text-white group-hover:text-gray-400 transition-all duration-300">
+                    <span className="text-sm text-white group-hover:text-gray-400 transition-all duration-300 hidden lg:contents">
                         {item.label}
                     </span>
                 </Link>
