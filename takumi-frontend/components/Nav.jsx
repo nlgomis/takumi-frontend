@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
+import AuthButton from "./AuthButton"
 
 const Nav = () => {
     const links = [
@@ -13,12 +14,6 @@ const Nav = () => {
         { label: '匠の職人', path: '/craftsman/' },
         { label: 'アクセス', path: '/access/' },
     ]
-
-    // const languages = [
-    //     { label: '日本語', code: 'ja' },
-    //     { label: 'ENG', code: 'en' },
-    //     { label: '中文', code: 'zh' },
-    // ]
 
     const [open, setOpen] = useState(false)
     const navigation = usePathname()
@@ -34,17 +29,7 @@ const Nav = () => {
     return (
         <div className="fixed w-full">
             {/* Language Selector */}
-            {/* <div className="absolute z-[60] flex -top-4 right-20 gap-4 h-10">
-                {languages.map((lang) => (
-                    <button
-                        key={lang.code}
-                        className="text-sm text-white hover:text-gray-400 transition-all duration-300"
-                    >
-                        {lang.label}
-                    </button>
-                ))}
-            </div> */}
-
+            <AuthButton />
             {/* Hamburger Button */}
             <button
                 className="z-[60] fixed top-4 right-4 w-10 h-10"
