@@ -27,12 +27,12 @@ const Nav = () => {
     }
 
     return (
-        <div className="fixed w-full">
+        <div className=" relative w-full">
             {/* Language Selector */}
             <AuthButton />
             {/* Hamburger Button */}
             <button
-                className="z-[60] fixed top-4 right-4 w-10 h-10"
+                className="z-[60] absolute -top-[18px] right-0 md:right-4 w-10 h-10"
                 onClick={handleMenuOpen}
             >
                 <span className={`
@@ -60,7 +60,7 @@ const Nav = () => {
 
             {/* Navigation Menu */}
             <nav className={`
-                fixed inset-0 bg-black transition-all duration-500
+                fixed inset-0 bg-black transition-all duration-500 z-50
                 ${open ? "opacity-100 visible" : "opacity-0 invisible"}
             `}>
                 <div className="container h-screen mx-auto px-4 flex justify-center items-center">

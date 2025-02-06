@@ -1,14 +1,14 @@
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-
-import { Pagination, Autoplay } from 'swiper/modules';
 
 const heroData = [
     {
@@ -39,7 +39,7 @@ const heroData = [
 
 const HeroCarousel = () => {
     return (
-        <div className="relative w-full h-[calc(100dvh-64px)] ">
+        <div className="relative w-full h-[calc(100dvh-80px)]">
             <Swiper
                 slidesPerView={1}
                 spaceBetween={0}
@@ -70,16 +70,6 @@ const HeroCarousel = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                <Image
-                    src="/images/mainvisual_logo.png"
-                    alt="メインロゴ"
-                    width={300}
-                    height={300}
-                    quality={100}
-                    priority
-                />
-            </div>
         </div>
     );
 };
