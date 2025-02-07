@@ -12,7 +12,7 @@ const Footer = () => {
                     className="object-cover mx-auto"
                 />
             </div>
-            <small >&copy;Takumi</small>
+            <small >&copy;2025 Takumi All rights reserved.</small>
         </footer>
     )
 }
