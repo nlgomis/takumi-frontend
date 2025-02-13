@@ -5,11 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const shipporiMincho = Shippori_Mincho({
-    subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-    display: "swap",
-    variable: "--font-shippori",
-    preload: true,
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-shippori",
+  preload: true,
 });
 
 export const metadata = {
