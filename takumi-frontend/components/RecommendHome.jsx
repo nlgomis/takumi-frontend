@@ -5,42 +5,42 @@ const products = [
     {
         id: 1,
         imageUrl: "/images/item1.png",
-        titleJp: "コップ",
+        titleJp: "月影 -コップ-",
         titleEn: "Cup",
         link: "/products/cup1"
     },
     {
         id: 2,
         imageUrl: "/images/item2.png",
-        titleJp: "コップ",
+        titleJp: "雲海",
         titleEn: "Cup",
         link: "/products/cup2"
     },
     {
         id: 3,
         imageUrl: "/images/item3.png",
-        titleJp: "花瓶",
+        titleJp: "歌華",
         titleEn: "Vase",
         link: "/products/vase"
     },
     {
         id: 4,
         imageUrl: "/images/item4.png",
-        titleJp: "お茶碗",
+        titleJp: "月影 -お茶碗-",
         titleEn: "Bowl",
         link: "/products/bowl"
     },
     {
         id: 5,
         imageUrl: "/images/item5.png",
-        titleJp: "飾り用のお皿",
+        titleJp: "金華",
         titleEn: "Display Plate",
         link: "/products/display-plate"
     },
     {
         id: 6,
         imageUrl: "/images/item6.png",
-        titleJp: "お皿",
+        titleJp: "紅染",
         titleEn: "Plate",
         link: "/products/plate"
     }
