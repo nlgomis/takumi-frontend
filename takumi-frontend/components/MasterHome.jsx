@@ -42,7 +42,7 @@ const MasterHome = () => {
     if (isLoading) {
         return (
             <section className="min-h-[400px] flex items-center justify-center">
-                <div>読み込み中...</div>
+                <div className="text-white">読み込み中...</div>
             </section>
         );
     }
@@ -50,7 +50,7 @@ const MasterHome = () => {
     if (error) {
         return (
             <section className="min-h-[400px] flex items-center justify-center">
-                <div>{error}</div>
+                <div className="text-white">{error}</div>
             </section>
         );
     }
@@ -58,7 +58,7 @@ const MasterHome = () => {
     if (masters.length === 0) {
         return (
             <section className="min-h-[400px] flex items-center justify-center">
-                <div>表示できる職人データがありません。</div>
+                <div className="text-white">表示できる職人データがありません。</div>
             </section>
         );
     }
