@@ -1,52 +1,58 @@
-import Image from "next/image"
-import Link from "next/link"
-
-const products = [
-    {
-        id: 1,
-        imageUrl: "/images/item1.png",
-        titleJp: "月影 -コップ-",
-        titleEn: "Cup",
-        link: "/products/cup1"
-    },
-    {
-        id: 2,
-        imageUrl: "/images/item2.png",
-        titleJp: "雲海",
-        titleEn: "Cup",
-        link: "/products/cup2"
-    },
-    {
-        id: 3,
-        imageUrl: "/images/item3.png",
-        titleJp: "歌華",
-        titleEn: "Vase",
-        link: "/products/vase"
-    },
-    {
-        id: 4,
-        imageUrl: "/images/item4.png",
-        titleJp: "月影 -お茶碗-",
-        titleEn: "Bowl",
-        link: "/products/bowl"
-    },
-    {
-        id: 5,
-        imageUrl: "/images/item5.png",
-        titleJp: "金華",
-        titleEn: "Display Plate",
-        link: "/products/display-plate"
-    },
-    {
-        id: 6,
-        imageUrl: "/images/item6.png",
-        titleJp: "紅染",
-        titleEn: "Plate",
-        link: "/products/plate"
-    }
-]
+"use client";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { getAllProducts } from "@/services/productService";
 
 const RecommendHome = () => {
+    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                setIsLoading(true);
+                const response = await getAllProducts();
+                console.log(getAllProducts);
+                if (response.success) {
+                    // 最初の6つの商品のみを取得
+                    const firstSixProducts = response.data.slice(0, 6).map(product => ({
+                        id: product._id,
+                        thumbnailImg: product.thumbnailImg,
+                        title: product.title,
+                        category: product.category,
+                        link: `/products/${product._id}`
+                    }));
+                    setProducts(firstSixProducts);
+                }
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                setError('商品の取得に失敗しました。');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    if (isLoading) {
+        return (
+            <section className="bg-black pt-14 min-h-[600px] flex items-center justify-center">
+                <div className="text-white">読み込み中...</div>
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section className="bg-black pt-14 min-h-[600px] flex items-center justify-center">
+                <div className="text-white">{error}</div>
+            </section>
+        );
+    }
+
     return (
         <section className="bg-black pt-14">
             <div className="max-w-full mx-auto">
@@ -59,22 +65,22 @@ const RecommendHome = () => {
                     </h1>
                     <div className="relative flex flex-row items-center">
                         <div className="-ml-2 w-[6px] h-[6px] rotate-45 origin-center bg-white" />
-                        <div className=" w-36 lg:w-52 h-px bg-white" />
+                        <div className="w-36 lg:w-52 h-px bg-white" />
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                    {products.map(product => (
+                    {products.map((product) => (
                         <Link
                             href={product.link}
-                            key={product.id}
+                            key={product._id}
                             className="group block relative"
                         >
                             <div className="flex flex-col overflow-hidden">
                                 <div className="relative aspect-[480/361] overflow-hidden">
                                     <Image
-                                        src={product.imageUrl}
-                                        alt={`${product.titleEn} - ${product.titleJp}`}
+                                        src={product.thumbnailImg}
+                                        alt={product.title}
                                         fill
                                         className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 cursor-pointer"
                                     />
@@ -87,10 +93,10 @@ const RecommendHome = () => {
                                 </div>
                                 <div className="bg-[#3C2A21] p-4 text-center transition-colors duration-500 group-hover:bg-[#4C3A31]">
                                     <h3 className="text-white text-xl mb-1 group-hover:text-white/80 transition-colors duration-500">
-                                        {product.titleJp}
+                                        {product.title}
                                     </h3>
                                     <p className="text-white/70 text-sm tracking-wider group-hover:text-white/50 transition-colors duration-500">
-                                        {product.titleEn}
+                                        {product.category}
                                     </p>
                                 </div>
                             </div>
@@ -99,7 +105,7 @@ const RecommendHome = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default RecommendHome;
