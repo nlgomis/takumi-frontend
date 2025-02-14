@@ -73,7 +73,7 @@ const RecommendHome = () => {
                     {products.map((product) => (
                         <Link
                             href={product.link}
-                            key={product._id}
+                            key={product.id}
                             className="group block relative"
                         >
                             <div className="flex flex-col overflow-hidden">
