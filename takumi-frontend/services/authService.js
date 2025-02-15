@@ -21,6 +21,8 @@ export const register = async (userData) => {
     if (data.data.token) {
       localStorage.setItem('token', data.data.token);
       localStorage.setItem('user', JSON.stringify(data.data.user));
+      // Dispatch storage event to trigger AuthButton update
+      window.dispatchEvent(new Event('storage'));
     }
 
     return data;
