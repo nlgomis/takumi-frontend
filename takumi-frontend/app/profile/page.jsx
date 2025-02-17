@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
@@ -22,7 +22,19 @@ import { createProduct  } from "@/services/productService";
 import { useRouter } from 'next/navigation';
 import { getOrders } from '@/services/orderService';
 
+const TabContent = ({ children, defaultTab }) => {
+  const searchParams = useSearchParams();
+  const activeTab = searchParams.get('tab') || defaultTab;
+
+  return (
+    <Tabs defaultValue={activeTab} orientation="vertical" className="flex space-x-12">
+      {children}
+    </Tabs>
+  );
+};
+
 export default function SettingsPage() {
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -434,7 +446,8 @@ useEffect(() => {
         )}
 
         <div className="p-6">
-          <Tabs defaultValue={defaultTab} orientation="vertical" className="flex space-x-12">
+        <Suspense fallback={<div>Loading...</div>}>
+          <TabContent defaultTab="profile">
           <TabsList className="w-[200px] bg-transparent flex flex-col justify-start h-full space-y-1">
               <TabsTrigger 
                 value="profile" 
@@ -1037,7 +1050,8 @@ useEffect(() => {
               )}
             </TabsContent>
 
-          </Tabs>
+          </TabContent>
+          </Suspense>
         </div>
       </div>
     </div>
