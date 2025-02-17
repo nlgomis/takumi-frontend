@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect,Suspense } from "react";
-import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,17 +20,9 @@ import { createMaster, getAllMasters } from "@/services/shokuninService";
 import { createProduct  } from "@/services/productService";
 import { useRouter } from 'next/navigation';
 import { getOrders } from '@/services/orderService';
+import SettingsTabs from "@/components/SettingsTabs";
 
-const TabContent = ({ children, defaultTab }) => {
-  const searchParams = useSearchParams();
-  const activeTab = searchParams.get('tab') || defaultTab;
 
-  return (
-    <Tabs defaultValue={activeTab} orientation="vertical" className="flex space-x-12">
-      {children}
-    </Tabs>
-  );
-};
 
 export default function SettingsPage() {
 
@@ -47,8 +38,6 @@ export default function SettingsPage() {
     orders: []
   });
   const [status, setStatus] = useState({ type: '', message: '' });
-  const searchParams = useSearchParams();
-  const defaultTab = searchParams.get('tab') || 'profile';
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -447,7 +436,7 @@ useEffect(() => {
 
         <div className="p-6">
         <Suspense fallback={<div>Loading...</div>}>
-          <TabContent defaultTab="profile">
+          <SettingsTabs>
           <TabsList className="w-[200px] bg-transparent flex flex-col justify-start h-full space-y-1">
               <TabsTrigger 
                 value="profile" 
@@ -1050,7 +1039,7 @@ useEffect(() => {
               )}
             </TabsContent>
 
-          </TabContent>
+          </SettingsTabs>
           </Suspense>
         </div>
       </div>
