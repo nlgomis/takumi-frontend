@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import CartButton from './CartButton'
 
-const AuthButton = () => {
+const AuthButton = ({ onNavigate }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -29,31 +30,22 @@ const AuthButton = () => {
         return () => window.removeEventListener('storage', handleStorageChange);
     }, []);
 
-    const navBar = [
-        ...(isAuthenticated ? [
-            { 
-                label: 'プロフィール', 
-                code: 'profile',
-                url: '/images/mypage.png',
-                alt: 'profile',
-                path: '/profile'
-            }
-        ] : [
-            {
-                label: 'ログイン',
-                code: 'login',
-                url: '/images/mypage.png',
-                alt: 'login',
-                path: '/auth/login'
-            }
-        ]),
+    const authNavItems = isAuthenticated ? [
         { 
-            label: 'カート', 
-            url: '/images/cart.png',
-            alt: 'cart',
-            code: 'cart',
-            path: '/cart'
-        },
+            label: 'プロフィール', 
+            code: 'profile',
+            url: '/images/mypage.png',
+            alt: 'profile',
+            path: '/profile'
+        }
+    ] : [
+        {
+            label: 'ログイン',
+            code: 'login',
+            url: '/images/mypage.png',
+            alt: 'login',
+            path: '/auth/login'
+        }
     ];
 
     if (isLoading) {
@@ -62,11 +54,12 @@ const AuthButton = () => {
 
     return (
         <div className="absolute flex items-center justify-end right-16 md:right-20 -top-3 gap-5 z-[60]">
-            {navBar.map((item) => (
+            {authNavItems.map((item) => (
                 <Link
                     href={item.path}
                     key={item.code}
                     className="flex gap-2 items-center group"
+                    onClick={onNavigate}
                 >
                     <div className="w-6 h-6 relative mb-1">
                         <Image
@@ -81,6 +74,7 @@ const AuthButton = () => {
                     </span>
                 </Link>
             ))}
+            <CartButton onNavigate={onNavigate} />
         </div>
     )
 }

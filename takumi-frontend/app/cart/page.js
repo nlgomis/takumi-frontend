@@ -10,8 +10,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Trash2, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { dispatchCartUpdate } from '@/lib/events';
+import CheckoutProgress from '@/components/CheckoutProgress';
 
 export default function CartPage() {
+  
   const [cart, setCart] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -39,24 +42,28 @@ export default function CartPage() {
   const handleUpdateQuantity = async (productId, currentUnits, increment) => {
     const newUnits = currentUnits + increment;
     if (newUnits < 1) return;
-
+  
     try {
       setError(null);
       const response = await updateCartItem(productId, newUnits);
       if (response.success) {
         setCart(response.data);
+        // Dispatch cart update event
+        dispatchCartUpdate(response.data);
       }
     } catch (error) {
       setError(error.message || "カートの更新に失敗しました。");
     }
   };
-
+  
   const handleRemoveItem = async (productId) => {
     try {
       setError(null);
       const response = await removeFromCart(productId);
       if (response.success) {
         setCart(response.data);
+        // Dispatch cart update event
+        dispatchCartUpdate(response.data);
       }
     } catch (error) {
       setError(error.message || "商品の削除に失敗しました。");
@@ -97,7 +104,7 @@ export default function CartPage() {
             <div className="text-center space-y-4">
               <ShoppingBag className="mx-auto h-12 w-12 text-muted-foreground" />
               <p className="text-muted-foreground">カートは空です。</p>
-              <Button onClick={() => router.push('/')}>
+              <Button onClick={() => router.push('/products')}>
                 買い物を続ける
               </Button>
             </div>
@@ -108,8 +115,10 @@ export default function CartPage() {
   }
 
   return (
+    <div className="min-h-screen">
+    <CheckoutProgress currentStep={1} />
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">ショッピングカート</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">ショッピングカート</h1>
       
       {error && (
         <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded-md">
@@ -215,5 +224,6 @@ export default function CartPage() {
         </div>
       </div>
     </div>
+  </div>
   );
 }

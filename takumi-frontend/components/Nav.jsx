@@ -27,9 +27,9 @@ const Nav = () => {
     }
 
     return (
-        <div className=" relative w-full">
+        <div className="relative w-full">
             {/* Language Selector */}
-            <AuthButton />
+            <AuthButton onNavigate={handleMenuClose} />
             {/* Hamburger Button */}
             <button
                 className="z-[60] absolute -top-[18px] right-0 md:right-4 w-10 h-10"
@@ -80,9 +80,9 @@ const Nav = () => {
                     <div className="w-px h-3/4 bg-white mx-10 md:mx-12"/>
 
                     {/* Navigation Links */}
-                    <ul className=" md:w-3/5 md:flex md:flex-row-reverse justify-center items-center gap-16">
+                    <ul className="md:w-3/5 md:flex md:flex-row-reverse justify-center items-center gap-16">
                         {links.map((link) => (
-                            <li key={link.path} className="md:writing-vertical mb-10 md:mb-0 ">
+                            <li key={link.path} className="md:writing-vertical mb-10 md:mb-0">
                                 <Link
                                     href={link.path}
                                     onClick={handleMenuClose}
@@ -106,4 +106,3 @@ const Nav = () => {
 }
 
 export default Nav
-

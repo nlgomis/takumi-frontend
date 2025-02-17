@@ -55,3 +55,20 @@ export const createMaster = async (masterData) => {
     throw error;
   }
 };
+
+
+export const getAllMasters = async () => {
+  try {
+    const response = await fetch(`${API_URL}/shokunin`);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || '職人一覧の取得に失敗しました。');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Get masters error:', error);
+    throw error;
+  }
+};

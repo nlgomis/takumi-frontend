@@ -11,7 +11,7 @@ import { getProductById } from "@/services/productService";
 import { addToCart } from "@/services/cartService";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import { dispatchCartUpdate } from '@/lib/events';
 export default function ProductDetailsPage({ params }) {
   const router = useRouter();
   const [product, setProduct] = useState(null);
@@ -19,7 +19,20 @@ export default function ProductDetailsPage({ params }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [error, setError] = useState(null);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      setIsAuthenticated(!!token);
+    };
+  
+    checkAuth();
+    window.addEventListener('storage', checkAuth);
+  
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+    };
+  }, []);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -42,13 +55,20 @@ export default function ProductDetailsPage({ params }) {
     }
   }, [params.id]);
 
+  // In ProductDetailsPage:
   const handleAddToCart = async () => {
+    if (!isAuthenticated) {
+      router.push('/auth/login');
+      return;
+    }
+  
     try {
       setIsAddingToCart(true);
       setError(null);
       const response = await addToCart(product._id, 1);
       if (response.success) {
-        router.push('/cart');
+        dispatchCartUpdate(response.data);
+        router.push('/products');
       }
     } catch (error) {
       setError(error.message || 'カートへの追加に失敗しました。');
@@ -184,17 +204,23 @@ export default function ProductDetailsPage({ params }) {
                 </Card>
               </div>
 
-              <div className="pt-4">
-                <Button 
-                  className="w-full" 
-                  size="lg"
-                  disabled={product.units === 0 || isAddingToCart}
-                  onClick={handleAddToCart}
-                >
-                  {isAddingToCart ? '追加中...' : 
-                   product.units > 0 ? 'カートに追加' : '在庫切れ'}
-                </Button>
-              </div>
+              <div className="pt-4 space-y-2">
+  <Button 
+    className="w-full" 
+    size="lg"
+    disabled={product.units === 0 || isAddingToCart}
+    onClick={handleAddToCart}
+  >
+    {isAddingToCart ? '追加中...' : 
+     !isAuthenticated ? 'ログインしてカートに追加' :
+     product.units > 0 ? 'カートに追加' : '在庫切れ'}
+  </Button>
+  {!isAuthenticated && (
+    <p className="text-sm text-center text-muted-foreground">
+      カートに追加するにはログインが必要です
+    </p>
+  )}
+</div>
             </div>
           </div>
         </div>
