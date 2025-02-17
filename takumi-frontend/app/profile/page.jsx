@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect,Suspense } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { JapaneseAddressInput } from "@/components/JapaneseAddressInput";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -15,11 +16,16 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getCurrentUser, updateUser } from "@/services/authService";
-import { createMaster } from "@/services/shokuninService";
-import { createProduct, getAllMasters } from "@/services/productService";
+import { createMaster, getAllMasters } from "@/services/shokuninService";
+import { createProduct  } from "@/services/productService";
 import { useRouter } from 'next/navigation';
+import { getOrders } from '@/services/orderService';
+import SettingsTabs from "@/components/SettingsTabs";
+
+
 
 export default function SettingsPage() {
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -227,6 +233,61 @@ export default function SettingsPage() {
   const [productStatus, setProductStatus] = useState({ type: '', message: '' });
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
   const [imagesPreview, setImagesPreview] = useState([]);
+  // Add these state declarations
+const [sortOrder, setSortOrder] = useState('desc');
+const [orders, setOrders] = useState([]);
+
+// Add this helper function
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('ja-JP', {
+    style: 'currency',
+    currency: 'JPY'
+  }).format(price);
+};
+
+// Add this computed value
+const sortedOrders = React.useMemo(() => {
+  return [...orders].sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+    return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+  });
+}, [orders, sortOrder]);
+
+// Modify your useEffect to also fetch orders
+useEffect(() => {
+  const checkAuth = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/auth/login');
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const [userResponse, ordersResponse] = await Promise.all([
+        getCurrentUser(),
+        getOrders()
+      ]);
+
+      if (userResponse.success) {
+        setUserData(userResponse.data);
+        setIsAuthenticated(true);
+      }
+
+      if (ordersResponse.success) {
+        setOrders(ordersResponse.data);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      handleLogout();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  checkAuth();
+}, [router]);
   
   // Add this useEffect to fetch masters
   useEffect(() => {
@@ -374,7 +435,8 @@ export default function SettingsPage() {
         )}
 
         <div className="p-6">
-          <Tabs defaultValue="profile" orientation="vertical" className="flex space-x-12">
+        <Suspense fallback={<div>Loading...</div>}>
+          <SettingsTabs>
           <TabsList className="w-[200px] bg-transparent flex flex-col justify-start h-full space-y-1">
               <TabsTrigger 
                 value="profile" 
@@ -382,6 +444,12 @@ export default function SettingsPage() {
               >
                 プロフィール
               </TabsTrigger>
+              <TabsTrigger 
+  value="orders" 
+  className="w-full justify-start px-3 py-2 h-9 data-[state=active]:bg-muted"
+>
+  注文履歴
+</TabsTrigger>
               <TabsTrigger 
                 value="master" 
                 className="w-full justify-start px-3 py-2 h-9 data-[state=active]:bg-muted"
@@ -512,7 +580,136 @@ export default function SettingsPage() {
               )}
             </TabsContent>
 
+            <TabsContent value="orders" className="flex-1 lg:max-w-2xl mt-0">
+  {isLoading || !isAuthenticated ? (
+    <div className="space-y-4">
+      <Skeleton className="h-6 w-32" />
+      <Skeleton className="h-4 w-64" />
+      <div className="space-y-2">
+        <Skeleton className="h-32 w-full" />
+        <Skeleton className="h-32 w-full" />
+      </div>
+    </div>
+  ) : (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-medium">注文履歴</h3>
+        <p className="text-sm text-muted-foreground">
+          過去の注文履歴を確認できます。
+        </p>
+      </div>
+      <Separator />
 
+      <div className="flex justify-end">
+        <Select
+          value={sortOrder}
+          onValueChange={setSortOrder}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="並び替え" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="desc">新しい順</SelectItem>
+            <SelectItem value="asc">古い順</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="space-y-6">
+        {sortedOrders.map((order) => (
+          <Card key={order._id} className="overflow-hidden">
+            {/* Order Header */}
+            <div className="bg-muted p-4 border-b">
+              <div className="flex justify-between items-start">
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">
+                    注文番号: {order._id}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    注文日: {new Date(order.createdAt).toLocaleDateString('ja-JP', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg font-bold">
+                    {formatPrice(order.totalPrice)}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    商品点数: {order.products.reduce((sum, item) => sum + item.units, 0)}点
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <CardContent className="p-6">
+              {/* Products Grid */}
+              <div className="grid gap-6">
+                {order.products.map((item) => (
+                  <div 
+                    key={item._id} 
+                    className="flex items-start space-x-4 py-4 border-b last:border-0"
+                  >
+                    <div className="w-20 h-20 flex-shrink-0">
+                      <img
+                        src={item.product.thumbnailImg}
+                        alt={item.product.title}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                    </div>
+                    <div className="flex-grow">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-medium">{item.product.title}</h4>
+                          <p className="text-sm text-muted-foreground">
+                            数量: {item.units}点
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-medium">
+                            {formatPrice(item.priceAtTime * item.units)}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            単価: {formatPrice(item.priceAtTime)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Order Summary */}
+              <div className="mt-6 pt-4 border-t">
+                <div className="flex justify-between">
+                  <div>
+                    <p className="font-medium">合計</p>
+                    <p className="text-sm text-muted-foreground">
+                      (税込・送料込み)
+                    </p>
+                  </div>
+                  <p className="text-xl font-bold">
+                    {formatPrice(order.totalPrice)}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+
+        {sortedOrders.length === 0 && (
+          <div className="text-center py-8">
+            <p className="text-muted-foreground">注文履歴がありません。</p>
+          </div>
+        )}
+      </div>
+    </div>
+  )}
+</TabsContent>
             <TabsContent value="master" className="flex-1 lg:max-w-2xl mt-0">
       {isLoading || !isAuthenticated ? (
         <div className="space-y-4">
@@ -842,7 +1039,8 @@ export default function SettingsPage() {
               )}
             </TabsContent>
 
-          </Tabs>
+          </SettingsTabs>
+          </Suspense>
         </div>
       </div>
     </div>

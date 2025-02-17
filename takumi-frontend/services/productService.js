@@ -52,32 +52,7 @@ export const createProduct = async (productData) => {
     }
   };
 
-export const getAllMasters = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      throw new Error('認証が必要です。');
-    }
 
-    const response = await fetch(`${API_URL}/shokunin`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || '職人一覧の取得に失敗しました。');
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Get masters error:', error);
-    throw error;
-  }
-};
 
 // Add this to your productService.js
 export const getAllProducts = async () => {

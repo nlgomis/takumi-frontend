@@ -25,7 +25,9 @@ export default function RootLayout({ children }) {
         >
             <body className="antialiased font-shippori tracking-wider flex flex-col min-h-screen bg-black">
                 <Header />
+
                 <main className="flex-grow">{children}</main>
+               
                 <Footer />
             </body>
         </html>
