@@ -28,8 +28,12 @@ function ScrollToSection() {
 }
 
 export default function Home() {
+    // ページがマウントされたときにトップにスクロール
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, []);
     return (
-        <div>
+        <div >
             <Suspense fallback={null}>
                 <ScrollToSection />
             </Suspense>

@@ -1,22 +1,22 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import Image from "next/image"
 import AuthButton from "./AuthButton"
 
 const Nav = () => {
     const links = [
-        { label: 'トップ', path: '/', isAnchor: false },
-        { label: '匠について', path: 'about', isAnchor: true },
-        { label: '商品一覧', path: '/products', isAnchor: false },
-        { label: '匠の職人', path: 'masters', isAnchor: true },
-        { label: 'アクセス', path: 'access', isAnchor: true },
+        { label: 'トップ', path: '/' },
+        { label: '匠について', path: '#about' },
+        { label: '商品一覧', path: '/products' },
+        { label: '匠の職人', path: '#masters' },
+        { label: 'アクセス', path: '#access' },
     ]
 
     const [open, setOpen] = useState(false)
-    const pathname = usePathname()
+    const navigation = usePathname()
+    const router = useRouter()
 
     const handleMenuOpen = () => {
         setOpen(!open)
@@ -26,47 +26,51 @@ const Nav = () => {
         setOpen(false)
     }
 
-    const renderLink = (link) => {
-        if (link.isAnchor) {
-            // 現在のパスがルートページでない場合は、ルートページに遷移してからアンカーまでスクロール
-            const href = pathname === '/' ? `#${link.path}` : `/?section=${link.path}`
-            
-            return (
-                <Link
-                    href={href}
-                    onClick={handleMenuClose}
-                    className={`
-                        text-xl sm:text-3xl lg:text-4xl
-                        md:writing-mode-vertical-rl
-                        ${pathname === '/' && pathname.includes(link.path) ? 'text-gray-400' : 'text-white'}
-                        hover:text-gray-400 transition-all duration-500
-                    `}
-                >
-                    {link.label}
-                </Link>
-            )
-        }
+    const handleLinkClick = (path) => {
+        handleMenuClose()
 
-        return (
-            <Link
-                href={link.path}
-                onClick={handleMenuClose}
-                scroll={false}
-                className={`
-                    text-xl sm:text-3xl lg:text-4xl
-                    md:writing-mode-vertical-rl
-                    ${link.path === pathname ? 'text-gray-400' : 'text-white'}
-                    hover:text-gray-400 transition-all duration-500
-                `}
-            >
-                {link.label}
-            </Link>
-        )
+        // # で始まるリンクの処理
+        if (path.startsWith('#')) {
+            // トップページにいない場合はトップページに遷移してからスクロール
+            if (navigation !== '/') {
+                router.push('/')
+
+                // ページ遷移後にスクロール
+                setTimeout(() => {
+                    const element = document.querySelector(path)
+                    if (element) {
+                        const offset = 80; // 上部の余白 (必要に応じて調整)
+                        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 500) // 遷移後の若干の遅延を考慮
+            } else {
+                // トップページの場合はそのままスクロール
+                const element = document.querySelector(path)
+                if (element) {
+                    const offset = 80; // 上部の余白 (必要に応じて調整)
+                    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                        top: elementPosition - offset,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        } else {
+            // 通常のページ遷移
+            router.push(path)
+        }
     }
 
     return (
         <div className="relative w-full">
+            {/* Language Selector */}
             <AuthButton onNavigate={handleMenuClose} />
+
+            {/* Hamburger Button */}
             <button
                 className="z-[60] absolute -top-[18px] right-0 md:right-4 w-10 h-10"
                 onClick={handleMenuOpen}
@@ -94,12 +98,14 @@ const Nav = () => {
                 `} />
             </button>
 
+            {/* Navigation Menu */}
             <nav className={`
                 fixed inset-0 bg-black transition-all duration-500 z-50
                 ${open ? "opacity-100 visible" : "opacity-0 invisible"}
             `}>
-                <div className="container h-screen mx-auto px-4 flex justify-center items-center">
-                    <div className="w-32 md:w-1/5">
+                <div className="container h-screen mx-auto px-4 flex flex-col md:flex-row justify-center items-center">
+                    {/* Logo */}
+                    <div className="w-24 md:w-1/5 order-3 md:order-1">
                         <Image
                             src="/images/mainvisual_logo.png"
                             alt="ロゴ"
@@ -110,12 +116,24 @@ const Nav = () => {
                         />
                     </div>
 
-                    <div className="w-px h-3/4 bg-white mx-10 md:mx-12" />
+                    {/* Vertical Line */}
+                    <div className="w-px h-3/4 bg-white mx-10 md:mx-12 hidden md:block order-2" />
 
-                    <ul className="md:w-3/5 md:flex md:flex-row-reverse justify-center items-center gap-16">
+                    {/* Navigation Links */}
+                    <ul className="md:w-3/5 md:flex md:flex-row-reverse justify-center items-center gap-16 order-1 md:order-3">
                         {links.map((link) => (
-                            <li key={link.path} className="md:writing-vertical mb-10 md:mb-0">
-                                {renderLink(link)}
+                            <li key={link.path} className="md:writing-vertical mb-10 md:mb-0 text-center md:text-start">
+                                <button
+                                    onClick={() => handleLinkClick(link.path)}
+                                    className={`
+                                         text-xl sm:text-3xl lg:text-4xl
+                                        md:writing-mode-vertical-rl
+                                        ${link.path === navigation ? 'text-gray-400' : 'text-white'}
+                                        hover:text-gray-400 transition-all duration-500
+                                    `}
+                                >
+                                    {link.label}
+                                </button>
                             </li>
                         ))}
                     </ul>

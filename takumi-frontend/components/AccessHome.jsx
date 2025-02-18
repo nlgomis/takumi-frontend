@@ -75,13 +75,13 @@ const AccessHome = () => {
                                         width={50}
                                         height={50}
                                         className="object-cover transition-transform duration-500 ease-in-out hover:scale-105 cursor-pointer
-                                        w-9 h-9 md:w-12 md:h-12"
+                                        w-9 h-9 md:w-10 md:h-10"
                                     />
                                 </Link>
                             ))}
                         </div>
                         <div className="relative flex flex-row items-center">
-                            <div className=" w-44 md:w-60 h-px bg-darkbrown" />
+                            <div className=" w-44 md:w-52 h-px bg-darkbrown" />
                             <div className="-ml-2 w-[6px] h-[6px] rotate-45 origin-center bg-darkbrown" />
                         </div>
                     </div>
