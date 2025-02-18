@@ -5,19 +5,19 @@ import Link from "next/link"
 const sns = [
     {
         id: 1,
-        imageUrl: "/images/instagram.png",
+        imageUrl: "/images/instagram_b.png",
         alt: "instagram",
         link: "/#"
     },
     {
         id: 2,
-        imageUrl: "/images/twitterX.png",
+        imageUrl: "/images/twitterX_b.png",
         alt: "twiiterX",
         link: "/#"
     },
     {
         id: 3,
-        imageUrl: "/images/facebook.png",
+        imageUrl: "/images/facebook_b.png",
         alt: "facebook",
         link: "/#"
     },
