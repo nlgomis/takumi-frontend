@@ -72,3 +72,62 @@ export const getAllMasters = async () => {
     throw error;
   }
 };
+
+
+
+/*
+レスポンスデータの構造:
+{
+  success: true,
+  data: {
+    // 職人情報
+    _id: string,            // 職人のMongoDBオブジェクトID
+    customId: string,       // 職人に割り当てられた固有ID
+    name: string,           // 職人の名前（日本語）
+    romajiName: string,     // 職人の名前（ローマ字）
+    description: string,    // 職人の説明
+    address: string,        // 職人の住所
+    style: string,          // 職人の専門分野/スタイル
+    image: string,          // 職人のプロフィール画像のURL
+    createdAt: Date,        // 作成日時
+    updatedAt: Date,        // 最終更新日時
+    
+    // この職人の商品一覧
+    products: [{
+      _id: string,          // 商品のMongoDBオブジェクトID
+      title: string,        // 商品名
+      description: string,  // 商品の説明
+      price: number,        // 商品の価格
+      units: number,        // 在庫数
+      category: string,     // 商品カテゴリー
+      thumbnailImg: string, // 商品サムネイル画像のURL
+      images: [string],     // 商品画像URLの配列
+      createdAt: Date,      // 作成日時
+      updatedAt: Date       // 最終更新日時
+    }]
+  },
+  message: string           // レスポンスメッセージ（日本語）
+}
+*/
+
+export const getMasterWithProducts = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/shokunin/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || '職人情報の取得に失敗しました。');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Get master with products error:', error);
+    throw error;
+  }
+};
