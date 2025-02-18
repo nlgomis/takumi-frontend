@@ -104,10 +104,9 @@ const Nav = () => {
                 ${open ? "opacity-100 visible" : "opacity-0 invisible"}
             `}>
 
-                <div className="container h-screen mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-                    <div className="w-full h-40 md:hidden"></div>
+                <div className="container h-screen mx-auto px-4 flex flex-col md:flex-row justify-center items-center">
                     {/* Logo */}
-                    <div className="w-24 mb-6 md:mb-0 md:w-1/5 order-3 md:order-1">
+                    <div className="w-24 md:w-1/5 order-3 md:order-1">
                         <Image
                             src="/images/mainvisual_logo.png"
                             alt="ロゴ"
@@ -122,22 +121,24 @@ const Nav = () => {
                     <div className="w-px h-3/4 bg-white mx-10 md:mx-12 hidden md:block order-2" />
 
                     {/* Navigation Links */}
-                    <ul className="md:w-3/5 md:flex md:flex-row-reverse justify-center items-center gap-16 order-1 md:order-3">
-                        {links.map((link) => (
-                            <li key={link.path} className="md:writing-vertical mb-10 md:mb-0 text-center md:text-start">
-                                <button
-                                    onClick={() => handleLinkClick(link.path)}
-                                    className={`
+                    <ul className="flex justify-center items-center md:w-3/5 order-1 md:order-3 mt-12 md:mt-0">
+                        <div className=" md:flex text-center md:flex-row-reverse gap-16 order-1 ">
+                            {links.map((link) => (
+                                <li key={link.path} className="mb-12 md:mb-0">
+                                    <button
+                                        onClick={() => handleLinkClick(link.path)}
+                                        className={`
                                         text-xl sm:text-3xl 2xl:text-4xl
                                         md:writing-mode-vertical-rl
                                         ${link.path === navigation ? 'text-gray-400' : 'text-white'}
                                         hover:text-gray-400 transition-all duration-500
                                     `}
-                                >
-                                    {link.label}
-                                </button>
-                            </li>
-                        ))}
+                                    >
+                                        {link.label}
+                                    </button>
+                                </li>
+                            ))}
+                        </div>
                     </ul>
                 </div>
             </nav>
