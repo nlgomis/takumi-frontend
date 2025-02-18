@@ -2,7 +2,7 @@
 import Image from "next/image"
 const Footer = () => {
     return (
-        <footer className="bg-black py-4 text-white text-center">
+        <footer className=" bg-black py-4 text-white text-center">
             <div className="max-w-full">
                 <Image
                     src="/images/footer_logo.png"

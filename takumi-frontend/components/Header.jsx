@@ -56,7 +56,7 @@ const Header = () => {
                 ? "0%"
                 : "50%",
         transform: isTopPage
-            ? `translate(${hasScrolled && isMobile ? "0" : "-50%"}, -50%) scale(${hasScrolled ? 0.5 : isMobile ? 2.5 : 3.5 // モバイルでは小さめの拡大
+            ? `translate(${hasScrolled && isMobile ? "0" : "-50%"}, -50%) scale(${hasScrolled ? 0.5 : isMobile ? 2.0 : 3.0 // モバイルでは小さめの拡大
             })`
             : `translate(${isMobile ? "0" : "-50%"}, -50%) scale(0.5)`,
         transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
