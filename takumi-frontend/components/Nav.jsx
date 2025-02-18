@@ -8,15 +8,15 @@ import AuthButton from "./AuthButton"
 
 const Nav = () => {
     const links = [
-        { label: 'トップ', path: '/' },
-        { label: '匠について', path: '/about/' },
-        { label: '商品一覧', path: '/products/' },
-        { label: '匠の職人', path: '/craftsman/' },
-        { label: 'アクセス', path: '/access/' },
+        { label: 'トップ', path: '/', isAnchor: false },
+        { label: '匠について', path: 'about', isAnchor: true },
+        { label: '商品一覧', path: '/products', isAnchor: false },
+        { label: '匠の職人', path: 'masters', isAnchor: true },
+        { label: 'アクセス', path: 'access', isAnchor: true },
     ]
 
     const [open, setOpen] = useState(false)
-    const navigation = usePathname()
+    const pathname = usePathname()
 
     const handleMenuOpen = () => {
         setOpen(!open)
@@ -26,11 +26,47 @@ const Nav = () => {
         setOpen(false)
     }
 
+    const renderLink = (link) => {
+        if (link.isAnchor) {
+            // 現在のパスがルートページでない場合は、ルートページに遷移してからアンカーまでスクロール
+            const href = pathname === '/' ? `#${link.path}` : `/?section=${link.path}`
+            
+            return (
+                <Link
+                    href={href}
+                    onClick={handleMenuClose}
+                    className={`
+                        text-xl sm:text-3xl lg:text-4xl
+                        md:writing-mode-vertical-rl
+                        ${pathname === '/' && pathname.includes(link.path) ? 'text-gray-400' : 'text-white'}
+                        hover:text-gray-400 transition-all duration-500
+                    `}
+                >
+                    {link.label}
+                </Link>
+            )
+        }
+
+        return (
+            <Link
+                href={link.path}
+                onClick={handleMenuClose}
+                scroll={false}
+                className={`
+                    text-xl sm:text-3xl lg:text-4xl
+                    md:writing-mode-vertical-rl
+                    ${link.path === pathname ? 'text-gray-400' : 'text-white'}
+                    hover:text-gray-400 transition-all duration-500
+                `}
+            >
+                {link.label}
+            </Link>
+        )
+    }
+
     return (
         <div className="relative w-full">
-            {/* Language Selector */}
             <AuthButton onNavigate={handleMenuClose} />
-            {/* Hamburger Button */}
             <button
                 className="z-[60] absolute -top-[18px] right-0 md:right-4 w-10 h-10"
                 onClick={handleMenuOpen}
@@ -58,13 +94,11 @@ const Nav = () => {
                 `} />
             </button>
 
-            {/* Navigation Menu */}
             <nav className={`
                 fixed inset-0 bg-black transition-all duration-500 z-50
                 ${open ? "opacity-100 visible" : "opacity-0 invisible"}
             `}>
                 <div className="container h-screen mx-auto px-4 flex justify-center items-center">
-                    {/* Logo */}
                     <div className="w-32 md:w-1/5">
                         <Image
                             src="/images/mainvisual_logo.png"
@@ -76,26 +110,12 @@ const Nav = () => {
                         />
                     </div>
 
-                    {/* Vertical Line */}
-                    <div className="w-px h-3/4 bg-white mx-10 md:mx-12"/>
+                    <div className="w-px h-3/4 bg-white mx-10 md:mx-12" />
 
-                    {/* Navigation Links */}
                     <ul className="md:w-3/5 md:flex md:flex-row-reverse justify-center items-center gap-16">
                         {links.map((link) => (
                             <li key={link.path} className="md:writing-vertical mb-10 md:mb-0">
-                                <Link
-                                    href={link.path}
-                                    onClick={handleMenuClose}
-                                    scroll={false}
-                                    className={`
-                                        text-xl sm:text-3xl lg:text-4xl
-                                        md:writing-mode-vertical-rl
-                                        ${link.path === navigation ? 'text-gray-400' : 'text-white'}
-                                        hover:text-gray-400 transition-all duration-500
-                                    `}
-                                >
-                                    {link.label}
-                                </Link>
+                                {renderLink(link)}
                             </li>
                         ))}
                     </ul>
