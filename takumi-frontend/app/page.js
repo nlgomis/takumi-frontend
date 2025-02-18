@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import Hero from "@/components/Hero";
 import AboutHome from "@/components/AboutHome";
 import RecommendHome from "@/components/RecommendHome";
@@ -9,7 +10,8 @@ import DescriptionHome from "@/components/DescriptionHome";
 import MasterHome from "@/components/MasterHome";
 import AccessHome from "@/components/AccessHome";
 
-export default function Home() {
+// スクロール処理を別コンポーネントとして分離
+function ScrollToSection() {
     const searchParams = useSearchParams();
 
     useEffect(() => {
@@ -22,8 +24,15 @@ export default function Home() {
         }
     }, [searchParams]);
 
+    return null;
+}
+
+export default function Home() {
     return (
         <div>
+            <Suspense fallback={null}>
+                <ScrollToSection />
+            </Suspense>
             <Hero />
             <AboutHome />
             <RecommendHome />
