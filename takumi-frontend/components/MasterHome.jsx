@@ -64,7 +64,7 @@ const MasterHome = () => {
     }
 
     return (
-        <section id='masters'>
+        <section>
             <div className="grid grid-cols-1 sm:grid-cols-2">
                 {masters.map((master) => (
                     <Link

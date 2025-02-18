@@ -2,7 +2,7 @@ import React from 'react';
 
 const DescriptionHome = () => {
     return (
-        <section className="relative w-full h-[calc(100dvh-64px)] max-h-[800px] bg-white">
+        <section className="relative w-full h-[calc(100dvh-64px)] max-h-[800px] bg-white" id='masters'>
             {/* Content */}
             <div className="relative z-10 w-full min-h-full flex items-center justify-center lg:justify-start flex-row-reverse ">
                 <div className="max-w-full px-6 lg:px-20 xl:px-40 py-20">
