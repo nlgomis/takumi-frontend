@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from 'next/image'
 import Link from 'next/link'
-import { getAllMasters } from '@/services/productService'
+import { getAllMasters } from '@/services/shokuninService'
 
 const MasterHome = () => {
     const [masters, setMasters] = useState([]);
@@ -64,7 +64,7 @@ const MasterHome = () => {
     }
 
     return (
-        <section>
+        <section id='masters'>
             <div className="grid grid-cols-1 sm:grid-cols-2">
                 {masters.map((master) => (
                     <Link

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 
@@ -15,25 +14,22 @@ const heroData = [
         _id: '1',
         url: '/images/slider1.png',
         alt: 'hero1',
-        link: '/'
     },
     {
         _id: '2',
         url: '/images/slider2.png',
         alt: 'hero2',
-        link: '/about/'
+
     },
     {
         _id: '3',
         url: '/images/slider3.png',
         alt: 'hero3',
-        link: '/craftsman/'
     },
     {
         _id: '4',
         url: '/images/slider4.png',
         alt: 'hero4',
-        link: '/access/'
     },
 ];
 
@@ -55,7 +51,7 @@ const HeroCarousel = () => {
             >
                 {heroData.map(hero => (
                     <SwiperSlide key={hero._id}>
-                        <Link href={hero.link}>
+                        <div>
                             <Image
                                 src={hero.url}
                                 alt={hero.alt}
@@ -66,7 +62,7 @@ const HeroCarousel = () => {
                                 quality={100}
                                 priority
                             />
-                        </Link>
+                        </div>
                     </SwiperSlide>
                 ))}
             </Swiper>

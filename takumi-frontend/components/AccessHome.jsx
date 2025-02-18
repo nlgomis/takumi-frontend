@@ -25,7 +25,7 @@ const sns = [
 
 const AccessHome = () => {
     return (
-        <section className="bg-white py-14">
+        <section className="bg-white py-14" id='access'>
             <div className="max-w-full mx-auto">
                 <div className="ml-5 lg:ml-12 mb-8 lg:mb-12">
                     <h2 className="text-darkbrown text-base lg:text-xl font-light tracking-wide mb-1">

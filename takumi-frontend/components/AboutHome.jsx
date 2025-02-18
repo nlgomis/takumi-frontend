@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutHome = () => {
     return (
-        <section className="relative w-full h-[calc(100dvh-64px)] max-h-[800px] bg-black">
+        <section className="relative w-full h-[calc(100dvh-64px)] max-h-[800px] bg-black" id='about'>
             {/* Background Image */}
             <div className="absolute inset-0 w-full h-full ">
                 <img
