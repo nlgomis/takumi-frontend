@@ -103,9 +103,11 @@ const Nav = () => {
                 fixed inset-0 bg-black transition-all duration-500 z-50
                 ${open ? "opacity-100 visible" : "opacity-0 invisible"}
             `}>
-                <div className="container h-screen mx-auto px-4 flex flex-col md:flex-row justify-center items-center">
+
+                <div className="container h-screen mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+                    <div className="w-full h-40 md:hidden"></div>
                     {/* Logo */}
-                    <div className="w-24 md:w-1/5 order-3 md:order-1">
+                    <div className="w-24 mb-6 md:mb-0 md:w-1/5 order-3 md:order-1">
                         <Image
                             src="/images/mainvisual_logo.png"
                             alt="ロゴ"
@@ -126,7 +128,7 @@ const Nav = () => {
                                 <button
                                     onClick={() => handleLinkClick(link.path)}
                                     className={`
-                                         text-xl sm:text-3xl lg:text-4xl
+                                        text-xl sm:text-3xl 2xl:text-4xl
                                         md:writing-mode-vertical-rl
                                         ${link.path === navigation ? 'text-gray-400' : 'text-white'}
                                         hover:text-gray-400 transition-all duration-500

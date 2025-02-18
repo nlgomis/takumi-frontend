@@ -16,18 +16,18 @@ const AboutHome = () => {
 
             {/* Content */}
             <div className="relative z-10 w-full min-h-full flex items-center justify-center lg:justify-start flex-row-reverse ">
-                <div className="max-w-full px-6 lg:px-20 xl:px-40 py-20">
+                <div className="max-w-full px-6 lg:px-20 xl:px-20 2xl:px-40 py-20">
                     <div className=" flex flex-row-reverse">
-                        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 writing-mode-vertical-rl ml-2 lg:ml-8  text-shadow">
+                        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 writing-mode-vertical-rl ml-2 md:ml-8  text-shadow">
                             匠について
                         </h2>
                         {/* Diamond and Line */}
-                        <div className="relative flex flex-col items-center ml-4 lg:ml-20 -mt-8">
+                        <div className="relative flex flex-col items-center ml-4 md:ml-8 lg:ml-20 -mt-8">
                             <div className="w-[6px] h-[6px] rotate-45 origin-center bg-white" />
                             <div className="w-px h-full bg-white" />
                         </div>
 
-                        <div className="text-sm :text-base lg:text-xl text-gray-200 mb-8 writing-mode-vertical-rl flex flex-col gap-2 sm:gap-8 lg:gap-12 xl:gap-20 tracking-[0.3em] text-shadow">
+                        <div className="text-sm sm:text-base lg:text-xl text-gray-200 mb-8 writing-mode-vertical-rl flex flex-col gap-2 sm:gap-8 md:gap-12 lg:gap-14 xl:gap-20 tracking-[0.3em] text-shadow">
                             <p >有田焼は四百年以上の歴史を誇る</p>
                             <p>日本の伝統工芸</p>
                             <p>その美しさと技術を世界に届くため</p>
