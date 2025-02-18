@@ -46,7 +46,7 @@ const Nav = () => {
                             behavior: 'smooth'
                         });
                     }
-                }, 500) // 遷移後の若干の遅延を考慮
+                }, 800) // 遷移後の若干の遅延を考慮
             } else {
                 // トップページの場合はそのままスクロール
                 const element = document.querySelector(path)
