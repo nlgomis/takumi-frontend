@@ -15,7 +15,7 @@ const MasterHome = () => {
                 setIsLoading(true);
                 setError(null);
                 const response = await getAllMasters();
-                
+
                 if (response.success) {
                     // データの形式を統一
                     const formattedMasters = response.data.map(master => ({
@@ -70,17 +70,17 @@ const MasterHome = () => {
                     <Link
                         href={master.link}
                         key={master.id}
-                        className="group block"
+                        className="group block relative"
                     >
                         <div className="relative h-full aspect-[120/43] overflow-hidden">
                             <Image
                                 src={`/images/${master.id}.png`}
                                 alt={`${master.romajiName} - ${master.name}`}
                                 fill
-                                className="object-contain transition-all duration-500 group-hover:brightness-75 cursor-pointer"
+                                className="object-contain transition-transform duration-500 group-hover:scale-105 cursor-pointer"
                             />
                             <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <div className="bg-white/20 border border-white text-white px-14 py-4 text-sm font-medium hover:bg-white/40 transition-colors">
+                                <div className="z-[1] bg-white/20 border border-white text-white px-14 py-4 text-sm font-medium hover:bg-white/40 transition-colors">
                                     今すぐ詳細を見る
                                 </div>
                             </div>
@@ -105,3 +105,4 @@ const MasterHome = () => {
 };
 
 export default MasterHome;
+
