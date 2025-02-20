@@ -9,7 +9,7 @@ const MasterHome = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
+    useEffect(() => { 
         const fetchMasters = async () => {
             try {
                 setIsLoading(true);
@@ -41,7 +41,7 @@ const MasterHome = () => {
 
     if (isLoading) {
         return (
-            <section className="min-h-[400px] flex items-center justify-center">
+            <section className="bg-black min-h-[400px] flex items-center justify-center">
                 <div className="text-white">読み込み中...</div>
             </section>
         );
@@ -49,7 +49,7 @@ const MasterHome = () => {
 
     if (error) {
         return (
-            <section className="min-h-[400px] flex items-center justify-center">
+            <section className="bg-black min-h-[400px] flex items-center justify-center">
                 <div className="text-white">{error}</div>
             </section>
         );
@@ -57,14 +57,14 @@ const MasterHome = () => {
 
     if (masters.length === 0) {
         return (
-            <section className="min-h-[400px] flex items-center justify-center">
+            <section className="bg-black min-h-[400px] flex items-center justify-center">
                 <div className="text-white">表示できる職人データがありません。</div>
             </section>
         );
     }
 
     return (
-        <section>
+        <section className="bg-black">
             <div className="grid grid-cols-1 sm:grid-cols-2">
                 {masters.map((master) => (
                     <Link
