@@ -116,7 +116,7 @@ export default function ProductsPage() {
                       残り{product.units}点
                     </p>
                     <Button 
-                      variant="secondary"
+                     className="bg-[#b1947f] hover:bg-[#b1947f]/90"
                       onClick={(e) => {
                         e.stopPropagation(); // Prevent card click event
                         handleViewDetails(product._id);

@@ -155,7 +155,7 @@ export default function CheckoutSuccessPage() {
                 
                 <Button 
                   onClick={() => router.push('/products')}
-                  className="w-full md:w-auto md:min-w-[200px]"
+                  className="w-full md:w-auto md:min-w-[200px] bg-[#b1947f] hover:bg-[#b1947f]/90"
                 >
                   買い物を続ける
                 </Button>

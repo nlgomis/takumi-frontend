@@ -104,7 +104,9 @@ export default function CartPage() {
             <div className="text-center space-y-4">
               <ShoppingBag className="mx-auto h-12 w-12 text-muted-foreground" />
               <p className="text-muted-foreground">カートは空です。</p>
-              <Button onClick={() => router.push('/products')}>
+              <Button 
+                className="bg-[#b1947f] hover:bg-[#b1947f]/90"
+                onClick={() => router.push('/products')}>
                 買い物を続ける
               </Button>
             </div>
@@ -212,7 +214,7 @@ export default function CartPage() {
                 </div>
 
                 <Button 
-                  className="w-full"
+                  className="w-full bg-[#b1947f] hover:bg-[#b1947f]/90"
                   size="lg"
                   onClick={() => router.push('/checkout')}
                 >
