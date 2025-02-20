@@ -60,7 +60,7 @@ const CheckoutProgress = ({ currentStep = 1 }) => {
               <span 
                 className={cn(
                   "mt-2 text-sm font-medium transition-colors duration-300",
-                  step.id === currentStep && "text-white",
+                  step.id === currentStep && "text-black",
                   step.id < currentStep && "text-green-500",
                   step.id > currentStep && "text-muted-foreground"
                 )}

@@ -120,7 +120,7 @@ export default function CartPage() {
     <div className="min-h-screen">
     <CheckoutProgress currentStep={1} />
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-white mb-6">ショッピングカート</h1>
+      <h1 className="text-2xl font-bold text-black mb-6">ショッピングカート</h1>
       
       {error && (
         <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded-md">
