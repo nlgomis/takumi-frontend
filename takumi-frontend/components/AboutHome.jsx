@@ -11,7 +11,7 @@ const AboutHome = () => {
                     className="w-full lg:w-4/5 h-full object-cover"
                 />
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-black/15" />
+                <div className="absolute inset-0 bg-black/50" />
             </div>
 
             {/* Content */}

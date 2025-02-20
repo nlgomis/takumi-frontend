@@ -4,7 +4,7 @@ const DescriptionHome = () => {
     return (
         <section className="relative w-full h-[calc(100dvh-64px)] max-h-[800px] bg-white" id='masters'>
             {/* Content */}
-            <div className="relative z-10 w-full min-h-full flex items-center justify-center lg:justify-start flex-row-reverse ">
+            <div className="relative z-10 w-full min-h-full flex items-center justify-center flex-row-reverse ">
                 <div className="max-w-full px-6 lg:px-20 xl:px-20 2xl:px-40 py-20">
                     <div className=" flex flex-row-reverse">
                         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-darkbrown mb-6 writing-mode-vertical-rl ml-2 md:ml-8  text-shadow">
