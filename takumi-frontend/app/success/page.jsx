@@ -145,7 +145,7 @@ export default function CheckoutSuccessPage() {
                 商品の発送準備が整い次第、発送のお知らせメールをお送りいたします。
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-4 md:space-x-4">
                 <Button 
   onClick={handleOrdersClick}                  variant="outline"
                   className="w-full md:w-auto md:min-w-[200px]"
