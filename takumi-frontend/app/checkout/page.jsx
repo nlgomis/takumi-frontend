@@ -157,7 +157,7 @@ const handlePaymentSubmit = async (paymentData) => {
     <div className="container mx-auto px-4 pt-6">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-white">ご注文内容の確認</h1>
+          <h1 className="text-black text-2xl font-bold">ご注文内容の確認</h1>
           <Button
             variant="outline"
             onClick={() => router.push('/cart')}
