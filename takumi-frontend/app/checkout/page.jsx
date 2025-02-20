@@ -297,7 +297,7 @@ const handlePaymentSubmit = async (paymentData) => {
                         <span>{formatPrice(calculateTotal())}</span>
                       </div>
                       <Button 
-                        className="w-full mt-4" 
+                        className="w-full mt-4 bg-[#b1947f] hover:bg-[#b1947f]/90" 
                         size="lg"
                         disabled={needsAddress || isUpdatingAddress || isProcessingPayment}
                         onClick={() => document.querySelector('form')?.requestSubmit()}
