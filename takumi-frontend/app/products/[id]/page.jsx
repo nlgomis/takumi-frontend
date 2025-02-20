@@ -205,16 +205,16 @@ export default function ProductDetailsPage({ params }) {
               </div>
 
               <div className="pt-4 space-y-2">
-  <Button 
-    className="w-full" 
+              <Button 
+    className="w-full bg-[#b1947f] hover:bg-[#b1947f]/90" 
     size="lg"
     disabled={product.units === 0 || isAddingToCart}
     onClick={handleAddToCart}
-  >
+>
     {isAddingToCart ? '追加中...' : 
      !isAuthenticated ? 'ログインしてカートに追加' :
      product.units > 0 ? 'カートに追加' : '在庫切れ'}
-  </Button>
+</Button>
   {!isAuthenticated && (
     <p className="text-sm text-center text-muted-foreground">
       カートに追加するにはログインが必要です
