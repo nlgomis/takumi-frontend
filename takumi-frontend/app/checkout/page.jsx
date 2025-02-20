@@ -151,7 +151,7 @@ const handlePaymentSubmit = async (paymentData) => {
   const needsAddress = !userData?.address;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mb-20">
     <CheckoutProgress currentStep={2} />
     
     <div className="container mx-auto px-4 pt-6">
@@ -297,7 +297,7 @@ const handlePaymentSubmit = async (paymentData) => {
                         <span>{formatPrice(calculateTotal())}</span>
                       </div>
                       <Button 
-                        className="w-full mt-4 bg-[#b1947f] hover:bg-[#b1947f]/90" 
+                        className="w-full mt-4" 
                         size="lg"
                         disabled={needsAddress || isUpdatingAddress || isProcessingPayment}
                         onClick={() => document.querySelector('form')?.requestSubmit()}
