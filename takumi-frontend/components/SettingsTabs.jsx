@@ -8,7 +8,7 @@ export default function SettingsTabs({ children }) {
   const activeTab = searchParams.get('tab') || 'profile';
 
   return (
-    <Tabs defaultValue={activeTab} orientation="vertical" className="flex space-x-12">
+    <Tabs defaultValue={activeTab} orientation="vertical" className="sm:flex sm:space-x-12">
       {children}
     </Tabs>
   );
