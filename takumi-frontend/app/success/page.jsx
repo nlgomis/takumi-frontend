@@ -23,9 +23,9 @@ export default function CheckoutSuccessPage() {
       try {
         setIsProcessing(true);
         setError(null);
-        
+
         const response = await createOrder();
-        
+
         if (response.success) {
           // Dispatch cart update event to refresh cart count
           dispatchCartUpdate({ products: [] });
@@ -34,13 +34,13 @@ export default function CheckoutSuccessPage() {
         }
       } catch (error) {
         console.error('Order creation error:', error);
-        
+
         // If we haven't exceeded max retries, try again
         if (retryCount < MAX_RETRIES) {
           setRetryCount(prev => prev + 1);
           return;
         }
-        
+
         setError(error.message || '注文の作成に失敗しました。');
       } finally {
         setIsProcessing(false);
@@ -68,24 +68,24 @@ export default function CheckoutSuccessPage() {
                 <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
                   <AlertCircle className="w-8 h-8 text-red-600" />
                 </div>
-                
+
                 <h1 className="text-2xl font-bold mb-4">
                   エラーが発生しました
                 </h1>
-                
+
                 <p className="text-muted-foreground mb-8">
                   {error}
                 </p>
 
                 <div className="space-y-4">
-                  <Button 
+                  <Button
                     onClick={handleRetry}
                     className="w-full md:w-auto md:min-w-[200px]"
                   >
                     もう一度試す
                   </Button>
-                  
-                  <Button 
+
+                  <Button
                     onClick={() => router.push('/cart')}
                     variant="outline"
                     className="w-full md:w-auto md:min-w-[200px]"
@@ -129,31 +129,31 @@ export default function CheckoutSuccessPage() {
       <div className="container mx-auto p-4">
         <div className="max-w-3xl mx-auto">
           <CheckoutProgress currentStep={3} />
-          
+
           <Card className="text-center">
             <CardContent className="pt-12 pb-12">
               <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
                 <Check className="w-8 h-8 text-green-600" />
               </div>
-              
+
               <h1 className="text-3xl font-bold mb-4">
                 ご注文ありがとうございます
               </h1>
-              
+
               <p className="text-muted-foreground mb-8">
                 ご注文の確認メールをお送りしました。<br />
                 商品の発送準備が整い次第、発送のお知らせメールをお送りいたします。
               </p>
 
               <div className="space-y-4 md:space-x-4">
-                <Button 
-  onClick={handleOrdersClick}                  variant="outline"
+                <Button
+                  onClick={handleOrdersClick} variant="outline"
                   className="w-full md:w-auto md:min-w-[200px]"
                 >
                   注文履歴を確認
                 </Button>
-                
-                <Button 
+
+                <Button
                   onClick={() => router.push('/products')}
                   className="w-full md:w-auto md:min-w-[200px] bg-[#b1947f] hover:bg-[#b1947f]/90"
                 >
