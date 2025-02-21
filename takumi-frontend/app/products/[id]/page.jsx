@@ -165,12 +165,15 @@ export default function ProductDetailsPage({ params }) {
 
             {/* Right side - Product info */}
             <div className="space-y-6">
-              <div>
-                <h1 className="text-3xl font-bold">{product.title}</h1>
-                <p className="text-2xl font-semibold mt-2">
-                  {formatPrice(product.price)}
-                </p>
-              </div>
+  <div>
+    <div className="flex items-baseline gap-3">
+      <h1 className="text-3xl font-bold">{product.title}</h1>
+      <span className="text-lg text-muted-foreground">{product.engTitle}</span>
+    </div>
+    <p className="text-2xl font-semibold mt-2">
+      {formatPrice(product.price)}
+    </p>
+  </div>
 
               <Separator />
 
@@ -187,7 +190,7 @@ export default function ProductDetailsPage({ params }) {
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span className="font-semibold">カテゴリー</span>
-                        <span className="text-muted-foreground">{product.category}</span>
+                        <span className="text-muted-foreground">{product.jpCategory}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="font-semibold">職人</span>

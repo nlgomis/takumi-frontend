@@ -59,6 +59,8 @@ export default function ProductsPage() {
     if (searchQuery) {
       result = result.filter(product => 
         product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.engTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+
         product.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
