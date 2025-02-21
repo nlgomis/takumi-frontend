@@ -21,7 +21,7 @@ const RecommendHome = () => {
                         id: product._id,
                         thumbnailImg: product.thumbnailImg,
                         title: product.title,
-                        category: product.category,
+                        category: product.engTitle,
                         link: `/products/${product._id}`
                     }));
                     setProducts(firstSixProducts);

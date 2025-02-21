@@ -1,7 +1,5 @@
-// services/productService.js
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3030/api';
 
-// services/productService.js
 export const createProduct = async (productData) => {
     try {
       const token = localStorage.getItem('token');
@@ -11,7 +9,7 @@ export const createProduct = async (productData) => {
       }
   
       // Validate all required fields
-      if (!productData.title || !productData.description || !productData.price || !productData.units || 
+      if (!productData.title || !productData.engTitle || !productData.description || !productData.price || !productData.units || 
           !productData.category || !productData.master || !productData.thumbnailImg || 
           !productData.images) {
         throw new Error('全ての項目を入力してください。');
@@ -19,10 +17,12 @@ export const createProduct = async (productData) => {
   
       const formData = new FormData();
       formData.append('title', productData.title);
+      formData.append('engTitle', productData.engTitle);
       formData.append('description', productData.description);
       formData.append('price', productData.price);
       formData.append('units', productData.units);
       formData.append('category', productData.category);
+      formData.append('jpCategory', productData.jpCategory);
       formData.append('master', productData.master);
       formData.append('thumbnailImg', productData.thumbnailImg);
       
@@ -52,9 +52,6 @@ export const createProduct = async (productData) => {
     }
   };
 
-
-
-// Add this to your productService.js
 export const getAllProducts = async () => {
     try {
       const response = await fetch(`${API_URL}/products`, {
@@ -77,7 +74,6 @@ export const getAllProducts = async () => {
     }
   };
 
-  // Add this to your productService.js
 export const getProductById = async (id) => {
     try {
       const response = await fetch(`${API_URL}/products/${id}`, {
