@@ -55,7 +55,7 @@ export default function ProductsPage() {
   useEffect(() => {
     let result = [...products];
     
-    // Apply search filter
+    // Apply search filters
     if (searchQuery) {
       result = result.filter(product => 
         product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
